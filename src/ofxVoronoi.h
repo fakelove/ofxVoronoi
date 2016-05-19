@@ -31,9 +31,12 @@ public:
     void clear();
     void setMinDistance(float minDis);
     void generateVoronoi();
+    void generateSmoothVoronoi();
     void addPoint(const ofVec2f &pt);
     void addPoint(float x, float y);
     void draw();
+    void drawSmooth(int _smoothAmt, bool _fill);
+    void drawMesh(int _smoothAmt, bool _fill);
     
     vector<ofPoint>& getPoints();
     ofRectangle getBounds();
