@@ -169,7 +169,7 @@ void ofxVoronoi::drawSmooth(int _smoothAmt, bool _fill) {
                     
                     //cout<<asin(ofMap(pSmooth.getVertices()[j].y, 0 ,ofGetHeight(), -1,1))<<endl;
                     
-                    //temp.z = 100*cos(2*ofGetElapsedTimef()+ofMap(temp.y, 0,ofGetWidth(), 0, 2*PI));
+                    temp.z = 300*cos(2*ofGetElapsedTimef()+ofMap(temp.x, 0,ofGetWidth(), 0, 2*PI));
                     //temp.z = 100*ofSignedNoise(2*ofGetElapsedTimef()+ofMap(temp.y, 0,ofGetWidth(), 0, 2*PI))+100*ofSignedNoise(2*ofGetElapsedTimef()+ofMap(temp.x, 0,ofGetWidth(), 0, 2*PI));
                  
                     if(j == 0) {
@@ -188,7 +188,7 @@ void ofxVoronoi::drawSmooth(int _smoothAmt, bool _fill) {
                 path.setColor(ofColor(255,255,255,100));
                 //path.setColor(ofMap(i, 0,cells.size(), 0,255));
                 //path.setStrokeWidth(ofMap(i, 0,cells.size(), 0,10));
-                path.setStrokeWidth(4);
+                path.setStrokeWidth(1);
                 path.setStrokeColor(ofColor::black);
                 
                 path.draw();
@@ -237,7 +237,7 @@ void ofxVoronoi::drawMesh(int _smoothAmt , bool _fill){
 
                 //temp.z = 50*ofSignedNoise(ofGetElapsedTimef()+ofMap(pSmooth.getVertices()[j].y, 0, ofGetHeight(),0,2*PI))+50*ofSignedNoise(ofGetElapsedTimef()+ofMap(pSmooth.getVertices()[j].x, 0, ofGetWidth(),0,2*PI));
                 
-               // temp.z = 200*sin(ofMap(pSmooth.getVertices()[j].y, 0, ofGetHeight(),0,2*PI));
+                temp.z = 200*sin(ofMap(pSmooth.getVertices()[j].y, 0, ofGetHeight(),0,2*PI));
                 
                 
                 mesh.addVertex(temp);
