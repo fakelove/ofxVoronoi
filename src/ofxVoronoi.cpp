@@ -155,12 +155,15 @@ void ofxVoronoi::drawSmooth(int _smoothAmt, bool _fill) {
     
     if(_fill){
         
+        
             for(int i=0; i<cells.size(); i++) {
                 ofPolyline p;
                 p.addVertices(cells[i].pts);
                 p.setClosed(true); //close before smoothing
                 ofPolyline pSmooth = p.getSmoothed(_smoothAmt);
                 ofPath path;
+                
+                
                 for( int j = 0; j< pSmooth.getVertices().size(); j++) {
                     ofPoint temp;
                     temp.x = pSmooth.getVertices()[j].x;
@@ -218,16 +221,31 @@ void ofxVoronoi::drawSmooth(int _smoothAmt, bool _fill) {
 void ofxVoronoi::drawMesh(int _smoothAmt , bool _fill){
     
     if(_fill){
+        ofRectangle internalBounds;
+        internalBounds = ofRectangle(200,200, ofGetWidth()-600, ofGetHeight()-400);
+        
+        bool ptsInside;
         
         for(int i=0; i<cells.size(); i++) {
+            ptsInside = true;
+            for(int j=0; j<cells[i].pts.size(); j++){
+                if(!internalBounds.inside(cells[i].pts[j])){
+                    ptsInside = false;
+                }
+            }
+            
+            if(ptsInside){
             ofPolyline p;
             p.addVertices(cells[i].pts);
+            
             p.setClosed(true); //close before smoothing
             ofPolyline pSmooth = p.getSmoothed(_smoothAmt);
             ofMesh mesh;
             mesh.setMode(OF_PRIMITIVE_LINE_LOOP);
             ofSetLineWidth(1);
             for( int j = 0; j< pSmooth.getVertices().size(); j++) {
+                
+                
                 ofPoint temp;
                 temp.x = pSmooth.getVertices()[j].x;
                 //temp.y = pSmooth.getVertices()[j].y;
@@ -244,8 +262,11 @@ void ofxVoronoi::drawMesh(int _smoothAmt , bool _fill){
             }
             
             mesh.draw();
+            }
             
         }
+        ofNoFill();
+        ofDrawRectangle(internalBounds);
         
         
     }else{
